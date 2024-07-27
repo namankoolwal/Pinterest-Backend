@@ -1,0 +1,21 @@
+<script>
+     function closeAlert() {
+          const alert = document.getElementById('success-alert');
+          alert.classList.add('opacity-0');
+          setTimeout(() => {
+            alert.remove();
+          }, 500); // 500ms to match the transition duration
+        }
+
+        window.onload = () => {
+          const alert = document.getElementById('success-alert');
+          if (alert) {
+            setTimeout(() => {
+              closeAlert();
+            }, 3000); // 3 seconds
+          }
+        }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+</body>
+</html>

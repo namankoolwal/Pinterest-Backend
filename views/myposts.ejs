@@ -1,0 +1,69 @@
+<script>
+  document.title = "User Posts Page";
+</script>
+<% include ./partials/header.ejs %>
+<div class="w-full mx-auto p-6 bg-gray-900 text-gray-200">
+  <div class="mt-8">
+    <h2 class="text-3xl font-bold text-center mb-6">My Posts</h2>
+    <div class="container mx-auto p-8 columns-3xs gap-8 space-y-8">
+      <% user.posts.forEach(post => { %>
+    
+    <a href="/posts/post/<%= post._id %>">
+
+      <div class="content-wrapper break-inside-avoid-column mb-5">
+        <div
+          class="image-wrapper relative w-full h-full overflow-hidden rounded-xl"
+        >
+          <div
+            class="overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-3 text-white opacity-0 hover:opacity-100"
+          >
+            <div class="flex justify-between">
+              <p class="cursor-pointer"><%= user.username%></p>
+              <button
+                class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
+              >
+                Save
+              </button>
+            </div>
+            <div class="flex justify-between items-center">
+              <button
+                class="bg-white text-black font-bold py-2 px-5 rounded-full"
+              >
+              <%= post.tag || 'tag'%>
+              </button>
+              <button
+                class="bg-white w-10 h-10 rounded-full flex justify-center items-center opacity-80 hover:opacity-100 ml-auto mr-3"
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/3580/3580382.png"
+                  alt=""
+                  class="w-6 h-6"
+                />
+              </button>
+              <button
+                class="bg-white w-10 h-10 rounded-full flex justify-center items-center opacity-80 hover:opacity-100"
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/512/512142.png"
+                  alt=""
+                  class="w-6 h-6"
+                />
+              </button>
+            </div>
+          </div>
+          <img
+            src="data:<%= post.img.contentType %>;base64,<%= post.img.data.toString('base64') %>"
+            class="w-full h-full object-cover rounded-xl"
+            alt="Post Image"
+            loading="lazy"
+          />
+        </div>
+        <p class="font-bold pt-2 pl-2"><%= post.posttext %></p>
+      </div>
+      </a>
+      <% }); %>
+    </div>
+  </div>
+</div>
+
+<% include ./partials/footer.ejs %>

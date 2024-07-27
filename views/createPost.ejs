@@ -1,0 +1,178 @@
+<script>
+  document.title = "Create Post Page";
+</script>
+<% include ./partials/header.ejs %>
+
+<!-- ===================================================================================================================== -->
+<!-- ************************************Create Post************************************* -->
+<div class="mt-8">
+  <form id="outer-form" class="bg-gray-900 rounded-lg shadow-lg p-6" action="/posts/upload" method="post" enctype="multipart/form-data">
+    <div class="w-1/2 space-y-6 m-auto">
+      <h2 class="text-4xl font-bold text-center">Create A New Post</h2>
+      <p class="text-center text-gray-400">Select a file to upload from your computer or device.</p>
+      <label for="file" class="flex flex-col items-center justify-center border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:border-blue-500 h-[20rem]" id="upload-label">
+        <div id="file-name" class="text-gray-400 text-center font-semibold">Drag and drop your file here <br />
+          or click to select a file!</div>
+        <div id="imgcont" class="mt-4 w-full hidden justify-center items-center flex-col">
+          <img id="image-preview" src="" alt="Image Preview" class="max-h-64 object-contain rounded-lg" />
+          <p id="imgname" class="text-gray-400">No file Uploaded</p>
+        </div>
+        <input type="file" id="file" name="file" hidden required accept="image/*">
+      </label>
+
+      <!-- =====================================Create Board Modal============================================= -->
+      <div class=" flex items-center justify-between gap-5">
+      <!-- Modal toggle -->
+      <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class=" inline-flex w-fit min-w-max text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-3 items-center">
+        Create New Board
+        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      
+      <!-- =============================================================================================== -->
+<% if(user.boards.length > 0){%>
+
+
+      <select id="category" name="boardTitle" class="bg-gray-900 border border-gray-600 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 inline w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+        <option value="" disabled selected>Choose a board</option>
+        
+        <% user.boards.forEach(element => { %>
+          <option value="<%= element.boardTitle %>"><%= element.boardTitle %></option>
+        <% }); %>
+      </select>
+      <%} %>
+    </div>
+      <!-- **************************************** -->
+       <div class="flex items-center gap-5">
+
+         <input type="text" name="posttext" placeholder="Enter post Title" class="w-full p-3 mb-4 border-2 border-gray-600 bg-gray-900 text-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 resize-none" required>
+         <input type="text" name="tag" placeholder="Enter post Tag" class="w-full p-3 mb-4 border-2 border-gray-600 bg-gray-900 text-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 resize-none" required>
+         
+        </div>
+      
+      <textarea type="text" name="postDesc" placeholder="Enter post Description" class="w-full p-3 mb-4 border-2 border-gray-600 bg-gray-900 text-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 resize-none" rows="3" required></textarea>
+      <button type="submit" class="w-full bg-blue-700 text-white p-3 rounded-lg font-bold hover:bg-blue-800 transition-colors">Create Post</button>
+    </div>
+  </form>
+
+
+
+
+  <!-- ------------------------------------- -->
+
+
+
+  <!-- Main modal -->
+  <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+      <!-- Modal content -->
+      <div class="relative p-5 inline-block bg-gray-900 border-2 border-gray-700 rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-2 md:p-3 border-b rounded-t mb-5 dark:border-gray-600">
+          <h3 class="text-lg font-semibold text-white dark:text-white">
+            Create New Board
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <form id="inner-form" class="p-4 md:p-5">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <div class="col-span-2">
+              <label for="boardTitle" class="block mb-2 text-sm font-medium text-white dark:text-white">Board Title</label>
+              <input type="text" name="boardTitle" id="boardTitle" class="bg-gray-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Board Title" required>
+            </div>
+            <div class="col-span-2">
+              <label class="block mb-2 text-sm font-medium text-white dark:text-white" for="coverImg">Cover Image</label>
+              <input class="block w-full text-sm text-white border border-gray-300 rounded-lg cursor-pointer bg-gray-900 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="coverImg" type="file" name="coverImg" accept="image/*">
+            </div>
+          </div>
+      
+          <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" formenctype="multipart/form-data" formmethod="post" formaction="/board/create">
+            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+            </svg>
+            Create Board
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ------------------------------------- -->
+</div>
+
+<script>
+  const uploadLabel = document.getElementById('upload-label');
+  const fileInput = document.getElementById('file');
+  const fileNameDisplay = document.getElementById('file-name');
+  const imgNameDisplay = document.getElementById('imgname');
+  const imagePreview = document.getElementById('image-preview');
+  const imgcont = document.getElementById('imgcont');
+
+  // Handle file selection via input
+  fileInput.addEventListener('change', function () {
+    const file = this.files[0];
+    const fileName = file ? file.name : 'No file selected';
+    imgNameDisplay.textContent = fileName;
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      imagePreview.src = imageUrl;
+      imagePreview.style.display = 'block';
+      imgcont.style.display = 'flex';
+      fileNameDisplay.style.display = 'none';
+    } else {
+      imagePreview.style.display = 'none';
+      imgcont.style.display = 'none';
+      fileNameDisplay.style.display = 'block';
+    }
+  });
+
+  // Handle drag and drop
+  uploadLabel.addEventListener('dragover', function (event) {
+    event.preventDefault();
+    uploadLabel.classList.add('bg-dragover');
+  });
+
+  uploadLabel.addEventListener('dragleave', function () {
+    uploadLabel.classList.remove('bg-dragover');
+  });
+
+  uploadLabel.addEventListener('drop', function (event) {
+    event.preventDefault();
+    uploadLabel.classList.remove('bg-dragover');
+
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      fileInput.files = files;
+      const file = files[0];
+      const fileName = file.name;
+      imgNameDisplay.textContent = fileName;
+
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        imagePreview.src = imageUrl;
+        imagePreview.style.display = 'block';
+        imgcont.style.display = 'flex';
+        fileNameDisplay.style.display = 'none';
+      } else {
+        imagePreview.style.display = 'none';
+        imgcont.style.display = 'none';
+        fileNameDisplay.style.display = 'block';
+      }
+    }
+  });
+
+
+</script>
+
+<% include ./partials/footer.ejs %>

@@ -1,0 +1,83 @@
+<script>
+  document.title = "All Posts Page";
+</script>
+<% include ./partials/header.ejs %>
+
+<% if (length) { %>
+  <div class="container mx-auto my-3">
+    <span class="font-bold text-lg text-gray-400">Result Found : <%= posts.length %> </span>
+  </div>
+<% } %>
+
+<% if (posts.length > 0) { %>
+  <div class="container mx-auto p-8 columns-3xs gap-8 space-y-8">
+    <% posts.forEach(post => { %>
+      <a href="/posts/post/<%= post._id %>">
+        <div class="content-wrapper break-inside-avoid-column mb-5">
+          <div class="image-wrapper relative w-full h-full overflow-hidden rounded-xl">
+            <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-3 text-white opacity-0 hover:opacity-100">
+              <div class="flex justify-between">
+                <p class="cursor-pointer"><%= post.user.username %></p>
+                <button
+                  class="inline-block bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-4 rounded-full save-button"
+                  data-image-url="data:<%= post.img.contentType %>;base64,<%= post.img.data.toString('base64') %>"
+                >
+                  Save
+                </button>
+              </div>
+              <div class="flex justify-between items-center">
+                <button class="bg-white text-black font-bold py-2 px-5 rounded-full">
+                  <%= post.tag || 'tag' %>
+                </button>
+                <button class="bg-white w-10 h-10 rounded-full flex justify-center items-center opacity-80 hover:opacity-100 ml-auto mr-3">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3580/3580382.png"
+                    alt=""
+                    class="w-6 h-6"
+                  />
+                </button>
+                <button class="bg-white w-10 h-10 rounded-full flex justify-center items-center opacity-80 hover:opacity-100">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/512/512142.png"
+                    alt=""
+                    class="w-6 h-6"
+                  />
+                </button>
+              </div>
+            </div>
+            <img
+              src="data:<%= post.img.contentType %>;base64,<%= post.img.data.toString('base64') %>"
+              class="w-full h-full object-cover rounded-xl"
+              alt="Post Image"
+              loading="lazy"
+            />
+          </div>
+          <p class="font-bold pt-2 pl-2"><%= post.posttext %></p>
+        </div>
+      </a>
+    <% }); %>
+  </div>
+<% } else { %>
+  <div class="container mx-auto h-full my-3 flex items-center justify-center">
+    <span class="font-bold text-2xl text-gray-400">No Posts Found</span>
+  </div>
+<% } %>
+
+<% include ./partials/footer.ejs %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.save-button').forEach(button => {
+      button.addEventListener('click', event => {
+        event.preventDefault(); // Prevent the default behavior
+        const imageUrl = button.getAttribute('data-image-url');
+        const link = document.createElement('a');
+        link.href = imageUrl;
+        link.download = 'image.png'; // Set the default download name for the image
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    });
+  });
+</script>

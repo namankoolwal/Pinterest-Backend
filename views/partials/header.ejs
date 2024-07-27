@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/output.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-gray-900 text-gray-200 font-sans">
+    <% if(nav===true) {%>
+
+    <nav class="flex py-5 px-10 items-center justify-between w-full">
+      <a href="/posts" class="font-semibold w-1/2">Pinterest</a>
+      <div class="w-full">
+        <form id="searchForm" class="mx-auto mb-0 w-full" method="get" action="/posts">
+          <label for="default-search" class="text-sm font-medium text-gray-200 sr-only dark:text-white">Search</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+            </div>
+            <input
+              type="search"
+              id="default-search"
+              name="search"
+              class="block w-full p-2 ps-10 text-sm text-white border-2 border-gray-600 rounded-lg bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder=""
+              required
+            />
+            <button
+              type="submit"
+              class="absolute border-2 border-gray-600 top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+              <span class="sr-only">Search</span>
+            </button>
+          </div>
+        </form>
+        
+      
+        
+      </div>
+      <div class="flex w-3/4 gap-8 items-center justify-end">
+        <a href="/profile">My Profile</a>
+        <a href="/posts/show">My Posts</a>
+        <a href="/posts">Feed</a>
+        <a href="/logout" class="bg-red-700 px-4 py-1 rounded-md">logout</a>
+      </div>
+    </nav>
+    <%}%>
+    <script>
+      document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const searchInput = document.getElementById('default-search').value;
+        const formAction = '/posts?search=' + encodeURIComponent(searchInput);
+        this.action = formAction;
+        this.submit();
+      });
+    </script>
