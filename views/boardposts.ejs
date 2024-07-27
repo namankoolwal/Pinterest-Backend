@@ -6,7 +6,7 @@
     <div class="mt-8">
       <h2 class="text-3xl font-bold text-center mb-6 capitalize"><%= board.boardTitle %></h2>
       <hr class="border-zinc-700 border">
-      <div class="container mx-auto p-8 columns-3xs gap-8 space-y-8">
+      <div class="container mx-auto p-8 columns-2 md:columns-3 lg:columns-4 gap-8 space-y-8">
         <% board.posts.forEach(post => { %>
             <a href="/posts/post/<%= post._id %>">
         <div class="content-wrapper break-inside-avoid-column mb-5">

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
+    "build:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
+    "minify:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --minify"
   },
   "dependencies": {
     "connect-flash": "^0.1.1",
@@ -24,6 +25,6 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.6"
+    "tailwindcss": "^3.4.7"
   }
 }

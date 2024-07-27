@@ -1,7 +1,8 @@
 const express = require('express');
 const Board = require('../models/board.model');
-const isLoggedIn = require("../middleware/isLoggedIn");
 const User = require('../models/user.model');
+const Post = require('../models/post.model');
+const isLoggedIn = require("../middleware/isLoggedIn");
 const upload = require('../utils/multer');
 const fs = require('fs');
 const path = require('path');
@@ -11,12 +12,15 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-  res.send(`This is the board route <br> ${fullUrl}`);
+  const user = await User.find()
+  const posts = await Post.find()
+  const boards = await Board.find()
+
+  res.send(`This is the board route <br> ${fullUrl} <br> total users registered ${user.length} <br> total posts ${posts.length} <br> total boards ${boards.length}`);
 }); 
 
 router.post('/create', isLoggedIn ,upload.single("coverImg") ,async(req,res)=>{
-  const fullUrl =  req.originalUrl;
-  console.log(fullUrl);
+  
     if (!req.file) {
         return res.status(400).send("No file uploaded");
       }

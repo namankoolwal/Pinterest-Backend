@@ -5,7 +5,7 @@ module.exports = {
     "./public/**/*.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false,
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       backgroundColor: {

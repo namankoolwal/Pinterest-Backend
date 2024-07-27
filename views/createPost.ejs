@@ -7,7 +7,7 @@
 <!-- ************************************Create Post************************************* -->
 <div class="mt-8">
   <form id="outer-form" class="bg-gray-900 rounded-lg shadow-lg p-6" action="/posts/upload" method="post" enctype="multipart/form-data">
-    <div class="w-1/2 space-y-6 m-auto">
+    <div class="md:w-1/2 space-y-6 m-auto">
       <h2 class="text-4xl font-bold text-center">Create A New Post</h2>
       <p class="text-center text-gray-400">Select a file to upload from your computer or device.</p>
       <label for="file" class="flex flex-col items-center justify-center border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:border-blue-500 h-[20rem]" id="upload-label">
@@ -52,7 +52,7 @@
          
         </div>
       
-      <textarea type="text" name="postDesc" placeholder="Enter post Description" class="w-full p-3 mb-4 border-2 border-gray-600 bg-gray-900 text-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 resize-none" rows="3" required></textarea>
+      <textarea type="text" name="postDesc" placeholder="Enter post Description" class="w-full p-3 mb-4 border-2 border-gray-600 bg-gray-900 text-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600" rows="3" required></textarea>
       <button type="submit" class="w-full bg-blue-700 text-white p-3 rounded-lg font-bold hover:bg-blue-800 transition-colors">Create Post</button>
     </div>
   </form>
@@ -86,11 +86,11 @@
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
               <label for="boardTitle" class="block mb-2 text-sm font-medium text-white dark:text-white">Board Title</label>
-              <input type="text" name="boardTitle" id="boardTitle" class="bg-gray-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Board Title" required>
+              <input type="text" name="boardTitle" id="boardTitle" class="bg-gray-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 capitalize" placeholder="Board Title" required>
             </div>
             <div class="col-span-2">
               <label class="block mb-2 text-sm font-medium text-white dark:text-white" for="coverImg">Cover Image</label>
-              <input class="block w-full text-sm text-white border border-gray-300 rounded-lg cursor-pointer bg-gray-900 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="coverImg" type="file" name="coverImg" accept="image/*">
+              <input class="block w-full text-sm text-white border border-gray-300 rounded-lg cursor-pointer bg-gray-900 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="coverImg" type="file" name="coverImg" accept="image/*" required>
             </div>
           </div>
       

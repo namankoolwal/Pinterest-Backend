@@ -74,7 +74,7 @@
   <div class="w-full container mx-auto mt-5 flex items-end justify-end px-8 relative">
     <!-- Modal toggle -->
     <button type="button" class="hover:bg-gray-700 rounded-full px-3 py-2" data-popover-target="popover-default" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
-      <i class="ri-add-large-line font-bold text-2xl"></i>
+      <i class="ri-add-large-line font-bold text-xl md:text-2xl"></i>
     </button>  
 
 
@@ -154,17 +154,20 @@
 
     
  
-  <div class="card flex flex-wrap gap-10 px-10 mt-10">
+  <div class="card grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-5 md:px-10 mt-10 ">
     <% user.boards.forEach(board => { %>
       <a href="/posts/show/<%= board._id  %>">
-      <div class="card bg-gray-800 p-3 rounded-lg">
-        <div class="w-56 h-44 bg-zinc-200 rounded-lg overflow-hidden">
+      <div class="card w-full bg-gray-800 p-3 rounded-lg ">
+        <div class="w-full h-32 md:w-full md:h-44 bg-zinc-200 rounded-lg overflow-hidden mx-auto">
           
           <img src="data:<%= board?.coverImg?.contentType %>;base64,<%= board?.coverImg?.data.toString('base64') %>" class="h-full w-full object-center object-cover"
           alt="Post Image" loading="lazy" />
         </div>
-        <span  class="inline-block font-semibold text-xl tracking-wider capitalize mt-3"><%= board?.boardTitle %></span>
-        <h5 class="text-xs font-medium text-white/70"> <%= board.posts.length %> Pins</h5>
+          <div class="w-full rounded-lg overflow-hidden mx-auto">
+
+            <span  class="inline-block font-semibold text-xl tracking-wider capitalize mt-3"><%= board?.boardTitle %></span>
+            <h5 class="text-xs font-medium text-white/70"> <%= board.posts.length %> Pins</h5>
+          </div>
       </div>
     </a>
       <% }); %>

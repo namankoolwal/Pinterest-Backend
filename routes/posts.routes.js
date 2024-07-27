@@ -12,19 +12,20 @@ const {
   singlePost,
 } = require("../controllers/post.controller");
 
-router.use(isLoggedIn);
-
 router.route("/").get(feed);
+
+router.route("/post/:postid").get(singlePost);
+
+
+router.use(isLoggedIn);
 
 router.route("/createPost").get(createPost);
 
 router.route("/upload").post(upload.single("file"), uploadPost);
 
-router.route("/show").get(showPost);
-
 router.route("/show/:boardid").get(showBoard);
 
-router.route("/post/:postid").get(singlePost);
+router.route("/show").get(showPost);
 
 
 module.exports = router;

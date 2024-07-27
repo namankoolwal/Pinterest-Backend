@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/output.css" />
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -12,14 +13,35 @@
       href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="/stylesheets/output.css" />
+
   </head>
 
   <body class="bg-gray-900 text-gray-200 font-sans">
-    <% if(nav===true) {%>
+    <nav class="flex flex-col md:flex-row py-5 mb-5 px-10 items-center justify-between w-full">
+      
+      <a href="/posts" class=" order-1 font-semibold text-lg md:text-xl flex items-center gap-1"><i class="ri-pinterest-fill text-red-700 text-2xl b"></i> Pinterest</a>
 
-    <nav class="flex py-5 px-10 items-center justify-between w-full">
-      <a href="/posts" class="font-semibold w-1/2">Pinterest</a>
-      <div class="w-full">
+
+      <% if(nav===true) { %>
+        <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto order-2 md:order-3">
+          <a href="/profile" class="text-sm md:text-base">My Profile</a>
+          <a href="/posts/show" class="text-sm md:text-base">My Posts</a>
+          <a href="/posts" class="text-sm md:text-base">Feed</a>
+          <a href="/logout" class="bg-red-700 px-4 py-1.5 rounded-md text-sm md:text-base">Logout</a>
+        </div>
+        <% } else { %>
+        <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto order-2 md:order-3">
+          <a href="/posts" class="text-sm md:text-base">Feed</a>
+          <a href="/login" class="bg-blue-700 border-2 border-gray-500 px-4 py-1.5 rounded-md text-sm md:text-base">Login</a>
+          <a href="/register" class="bg-blue-700 border-2 border-gray-500 px-4 py-1.5 rounded-md text-sm md:text-base">Register</a>
+        </div>
+        <% } %>
+
+
+
+      <div class="w-full mt-3 md:mt-0 md:w-1/2 order-3 md:order-2">
         <form
           id="searchForm"
           class="mx-auto mb-0 w-full"
@@ -33,7 +55,7 @@
           >
           <div class="relative">
             <div
-              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+              class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
             >
               <svg
                 class="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -55,13 +77,13 @@
               type="search"
               id="default-search"
               name="search"
-              class="block w-full p-2 ps-10 text-sm text-white border-2 border-gray-600 rounded-lg bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder=""
+              class="block w-full p-2 pl-10 text-sm text-white border-2 border-gray-500 rounded-lg bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search Posts..."
               required
             />
             <button
               type="submit"
-              class="absolute border-2 border-gray-600 top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="absolute border-2 border-gray-500 top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg
                 class="w-4 h-4"
@@ -83,14 +105,8 @@
           </div>
         </form>
       </div>
-      <div class="flex w-3/4 gap-8 items-center justify-end">
-        <a href="/profile">My Profile</a>
-        <a href="/posts/show">My Posts</a>
-        <a href="/posts">Feed</a>
-        <a href="/logout" class="bg-red-700 px-4 py-1 rounded-md">logout</a>
-      </div>
+      
     </nav>
-    <%}%>
     <script>
       document
         .getElementById("searchForm")
@@ -102,5 +118,4 @@
           this.submit();
         });
     </script>
-  </body>
-</html>
+  

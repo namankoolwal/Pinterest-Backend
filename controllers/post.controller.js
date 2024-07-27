@@ -7,11 +7,12 @@ const path = require("path");
 // Show Feed
 const feed = async (req, res) => {
   const posts = await Post.find().populate("user");
+  const user  = req?.user;
 
 //   ===============================search query ================================
+const  search  =  req?.query?.search;
 
 if( req.query.search){
-    const  search  =  req.query.search;
     // console.log("Search query in feed:", search);
     try {
       const posts = await Post.find({
@@ -26,7 +27,8 @@ if( req.query.search){
     //   console.log("Number of posts found:", length);
   
       // Send the posts and their length in the response
-     return res.render("feed", { posts, nav: true , length : true});
+
+     return res.render("feed", { posts, nav: user ? true : false , length : true , search});
     } catch (error) {
       console.error("Error fetching posts:", error.message);
      return res.status(500).send("An error occurred while searching for posts.");
@@ -34,7 +36,7 @@ if( req.query.search){
 }
 
 
- return res.render("feed", { posts, nav: true , length : false});
+ return res.render("feed", { posts, nav: user ? true :false , length : false , search});
 };
 
 // create Post
@@ -51,7 +53,7 @@ const uploadPost = async (req, res) => {
     return res.status(400).send("No file uploaded");
   }
 
-  console.log(" upload post ",req.body)
+  // console.log(" upload post ",req.body)
   const filePath = path.resolve(req.file.path);
   try {
     const userId = req.session.passport.user;
@@ -106,7 +108,6 @@ const showPost = async (req, res) => {
   res.render("myposts", { user, nav: true });
 };
 
-
 // show board
 const showBoard = async (req, res) => {
     
@@ -115,10 +116,11 @@ const showBoard = async (req, res) => {
    res.render("boardposts" , {board , nav: true});
   };
 
-
 // find single post
 const singlePost = async (req, res) =>{
     const postid = req.params.postid;
+    const user  = req?.user;
+
 
     try {
         const post = await Post.findById(postid).populate("user").populate("board");
@@ -126,7 +128,7 @@ const singlePost = async (req, res) =>{
             return res.status(404).send("Post not found");
         }
         // res.send(post);
-        res.render('singlePost' , {post , nav: true});
+        res.render('singlePost' , {post , nav: user ? true : false});
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");

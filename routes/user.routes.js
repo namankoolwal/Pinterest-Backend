@@ -31,7 +31,10 @@ const postLogin = passport.authenticate('local', {
 
 // Route Definitions
 router.route('/')
-  .get(home);
+  .get(feed);
+
+router.route('/register')
+.get(home)
 
 router.route('/register')
   .post(register);

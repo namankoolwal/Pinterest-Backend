@@ -52,7 +52,7 @@ const profile = async(req, res) => {
 const logout = (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
-    res.redirect('/login');
+    res.redirect('/');
   });
 };
 
@@ -95,11 +95,9 @@ const avatarupload = async(req, res)=>{
     }
 }
 
-
-
 // Render feed page
 const feed = (req, res) => {
-  res.render('feed' , {nav : false});
+  res.redirect('/posts');
 };
 
 module.exports = {

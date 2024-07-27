@@ -1,3 +1,21 @@
-<h1><%= message %></h1>
+<!-- <h1><%= message %></h1>
 <h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<pre><%= error.stack %></pre> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= error.status %> Error</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="flex justify-center items-center h-screen bg-gray-200">
+        <div class="text-center">
+            <h1 class="text-4xl font-medium"><%= error.status %></h1>
+            <p class="text-xl font-medium m-6"><%= message %></p>
+            <a href="/" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Go Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -71,6 +71,14 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+
+// // Catch-all route for handling 404 errors (unhandled routes)
+// app.use((req, res, next) => {
+//   res.status(404).send('Sorry, that route does not exist.');
+// });
+
+
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
