@@ -9,23 +9,13 @@ const passport = require('passport');
 const User = require('./models/user.model');
 const flash = require('connect-flash');
 require('dotenv').config();
-// set up rate limiter: maximum of five requests per minute
-var RateLimit = require('express-rate-limit');
-var limiter = RateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // max 100 requests per windowMs
-});
-
-var app = express();
-connectDB();
-
-app.use(limiter);
 
 var usersRouter = require('./routes/user.routes');
 const postsRouter = require('./routes/posts.routes');
 const boardRouter = require('./routes/board.routes');
 
-
+var app = express();
+connectDB();
  
 // view engine setup 
 app.set('views', path.join(__dirname, 'views'));
