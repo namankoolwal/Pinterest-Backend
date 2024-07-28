@@ -16,14 +16,16 @@ var limiter = RateLimit({
   max: 100, // max 100 requests per windowMs
 });
 
+var app = express();
+connectDB();
+
 app.use(limiter);
 
 var usersRouter = require('./routes/user.routes');
 const postsRouter = require('./routes/posts.routes');
 const boardRouter = require('./routes/board.routes');
 
-var app = express();
-connectDB();
+
  
 // view engine setup 
 app.set('views', path.join(__dirname, 'views'));
