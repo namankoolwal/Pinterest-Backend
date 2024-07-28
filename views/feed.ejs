@@ -1,7 +1,7 @@
 <script>
   document.title = "All Posts Page";
 </script>
-<% include ./partials/header.ejs %>
+<%- include('./partials/header.ejs') %> 
 
 <% if (length) { %>
   <div class="container mx-auto my-3 px-10 md:px-0">
@@ -67,7 +67,7 @@
   </div>
 <% } %>
 
-<% include ./partials/footer.ejs %>
+<%- include('./partials/footer.ejs') %> 
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

@@ -1,7 +1,7 @@
 <script>
   document.title = "Register Page";
 </script>
-<% include ./partials/header.ejs %>
+<%- include('./partials/header.ejs') %> 
 
 <!-- ================================================================================================ -->
 <% if(error.length > 0){ %>
@@ -64,4 +64,4 @@
   </div>
 </div>
 
-<% include ./partials/footer.ejs %>
+<%- include('./partials/footer.ejs') %>

@@ -1,7 +1,7 @@
 <script>
   document.title = "Profile Page";
 </script>
-<% include ./partials/header.ejs %>
+<%- include('./partials/header.ejs') %> 
 <% if(success.length > 0) { %>
   <div id="success-alert"
     class="bg-green-800 border border-green-600 text-green-200 px-4 py-3 rounded w-full transition-opacity duration-500 ease-in-out opacity-100 fixed top-0">
@@ -195,4 +195,4 @@
 
 
 
-<% include ./partials/footer.ejs %>
+<%- include('./partials/footer.ejs') %>
