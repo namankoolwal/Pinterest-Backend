@@ -16,6 +16,7 @@ var limiter = RateLimit({
   max: 100, // max 100 requests per windowMs
 });
 
+app.use(limiter);
 
 var usersRouter = require('./routes/user.routes');
 const postsRouter = require('./routes/posts.routes');
