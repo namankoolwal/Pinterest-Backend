@@ -1,33 +1,43 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const expressSession = require('express-session');
-const connectDB = require('./utils/db');
-const passport = require('passport');
-const User = require('./models/user.model');
-const flash = require('connect-flash');
-require('dotenv').config();
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+const expressSession = require("express-session");
+const connectDB = require("./utils/db");
+const passport = require("passport");
+const User = require("./models/user.model");
+const flash = require("connect-flash");
+const rateLimit = require("express-rate-limit");
+const usersRouter = require("./routes/user.routes");
+const postsRouter = require("./routes/posts.routes");
+const boardRouter = require("./routes/board.routes");
+const csrf = require('lusca').csrf;
+require("dotenv").config();
 
-var usersRouter = require('./routes/user.routes');
-const postsRouter = require('./routes/posts.routes');
-const boardRouter = require('./routes/board.routes');
+// limit repeated requests to public APIs and/or endpoints 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+});
 
-var app = express();
+const app = express();
 connectDB();
- 
-// view engine setup 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(limiter);
+
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // Express Session
-app.use(expressSession({
-  resave: false,
-  saveUninitialized: false,
-  secret: process.env.SESSION_SECRET
-}));
-
+app.use(
+  expressSession({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET,
+  })
+);
+// CSRF middleware - Web application security middleware.
+// app.use(csrf());
 // Flash middleware
 app.use(flash());
 
@@ -40,18 +50,18 @@ passport.serializeUser((user, done) => {
 });
 passport.deserializeUser((id, done) => {
   User.findById(id)
-    .then(user => {
+    .then((user) => {
       done(null, user);
     })
-    .catch(err => {
+    .catch((err) => {
       done(err);
     });
 });
 
 // **************************************************************************
-    // for localStrategy
-        // passport.serializeUser(User.serializeUser());
-        // passport.deserializeUser(User.deserializeUser());
+// for localStrategy
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 // ***************************************************************************
 
 // Middleware
@@ -59,35 +69,32 @@ passport.deserializeUser((id, done) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
-app.use('/', usersRouter);
-app.use('/posts', postsRouter);
-app.use('/board', boardRouter);
+app.use("/", usersRouter);
+app.use("/posts", postsRouter);
+app.use("/board", boardRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
-
 
 // // Catch-all route for handling 404 errors (unhandled routes)
 // app.use((req, res, next) => {
 //   res.status(404).send('Sorry, that route does not exist.');
 // });
 
-
-
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 module.exports = app;
