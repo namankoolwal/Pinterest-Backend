@@ -21,7 +21,7 @@ const limiter = rateLimit({
 
 const app = express();
 connectDB();
-app.use(limiter);
+// app.use(limiter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

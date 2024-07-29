@@ -33,7 +33,7 @@
       <span id="avatarclick" class="w-8 h-8 mb-2 mr-2 cursor-pointer absolute flex items-center justify-center bottom-0 right-0 bg-zinc-700 rounded-full">
         <i class="text-zinc-300 ri-pencil-fill"></i>
       </span>
-      <div class="w-36 h-36 rounded-full overflow-hidden">
+      <div class="w-36 h-36 rounded-full border border-zinc-500 overflow-hidden">
         <% if(!user?.avatar?.data == '' && !user?.avatar?.contentType?.trim() == '' ){ %>
           <img src="data:<%= user.avatar.contentType %>;base64,<%= user.avatar.data.toString('base64') %>" class="w-full h-full object-cover object-center" alt="Post Image" loading="lazy" />
         <%} else{%>
@@ -157,10 +157,10 @@
   <div class="card grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-5 md:px-10 mt-10 ">
     <% user.boards.forEach(board => { %>
       <a href="/posts/show/<%= board._id  %>">
-      <div class="card w-full bg-gray-800 p-3 rounded-lg ">
-        <div class="w-full h-32 md:w-full md:h-44 bg-zinc-200 rounded-lg overflow-hidden mx-auto">
+      <div class="card w-full bg-gray-950 p-3 rounded-lg ">
+        <div class="w-full h-32 md:w-full md:h-56 bg-zinc-700 p-1 rounded-lg overflow-hidden mx-auto">
           
-          <img src="data:<%= board?.coverImg?.contentType %>;base64,<%= board?.coverImg?.data.toString('base64') %>" class="h-full w-full object-center object-cover"
+          <img src="data:<%= board?.coverImg?.contentType %>;base64,<%= board?.coverImg?.data.toString('base64') %>" class="h-full w-full object-center object-cover rounded-lg"
           alt="Post Image" loading="lazy" />
         </div>
           <div class="w-full rounded-lg overflow-hidden mx-auto">

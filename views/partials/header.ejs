@@ -19,29 +19,48 @@
   </head>
 
   <body class="bg-gray-900 text-gray-200 font-sans">
-    <nav class="flex flex-col md:flex-row py-5 mb-5 px-10 items-center justify-between w-full">
-      
-      <a href="/posts" class=" order-1 font-semibold text-lg md:text-xl flex items-center gap-1"><i class="ri-pinterest-fill text-red-700 text-2xl b"></i> Pinterest</a>
+    <nav class="flex flex-col md:flex-row py-5 mb-5 px-3 md:px-10 items-center justify-between w-full">
+      <div class=" flex  items-baseline justify-between gap-10  md:gap-8 order-1">
 
+        <div class="flex mt-3 md:mt-0 items-baseline justify-between gap-5  md:gap-8 " >
+        <a href="/posts" class="  font-semibold text-lg md:text-xl flex items-center gap-1"><i class="ri-pinterest-fill text-red-700 text-2xl b"></i> Pinterest</a>
+        <a href="/posts" class="text-sm md:text-base">Home</a>
+      </div>
 
+        <div class="order-2 md:order-3 block md:hidden">
+          <% if(nav===true) { %>
+            <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto ">
+              <a href="/profile" class="text-sm md:text-base">My Profile</a>
+              <a href="/posts/show" class="text-sm md:text-base">My Posts</a>
+              <a href="/logout" class="bg-red-700 px-4 py-1.5 rounded-md text-sm md:text-base">Logout</a>
+            </div>
+            <% } else { %>
+            <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto">
+              <a href="/login" class="bg-blue-700 border-2 border-gray-500 px-4 py-1.5 rounded-md text-sm md:text-base">Login</a>
+              <a href="/register" class="bg-blue-700 border-2 border-gray-500 px-4 py-1.5 rounded-md text-sm md:text-base">Register</a>
+            </div>
+            <% } %>
+          </div>
+        
+      </div>
+
+      <div class="order-2 md:order-3 hidden md:block ">
       <% if(nav===true) { %>
-        <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto order-2 md:order-3">
+        <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto ">
           <a href="/profile" class="text-sm md:text-base">My Profile</a>
           <a href="/posts/show" class="text-sm md:text-base">My Posts</a>
-          <a href="/posts" class="text-sm md:text-base">Feed</a>
           <a href="/logout" class="bg-red-700 px-4 py-1.5 rounded-md text-sm md:text-base">Logout</a>
         </div>
         <% } else { %>
-        <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto order-2 md:order-3">
-          <a href="/posts" class="text-sm md:text-base">Feed</a>
+        <div class="flex mt-3 md:mt-0 gap-5 md:gap-8 items-center justify-end  md:w-auto">
           <a href="/login" class="bg-blue-700 border-2 border-gray-500 px-4 py-1.5 rounded-md text-sm md:text-base">Login</a>
           <a href="/register" class="bg-blue-700 border-2 border-gray-500 px-4 py-1.5 rounded-md text-sm md:text-base">Register</a>
         </div>
         <% } %>
+      </div>
 
 
-
-      <div class="w-full mt-3 md:mt-0 md:w-1/2 order-3 md:order-2">
+      <div class="w-full mt-5 md:mt-0 md:w-1/2 order-3 md:order-2 px-10 md:px-0">
         <form
           id="searchForm"
           class="mx-auto mb-0 w-full"
