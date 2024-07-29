@@ -2,6 +2,8 @@
 
 This project is a backend implementation of a Pinterest-like application. It includes basic functionalities such as user registration, post viewing, board creation, and pin management. The application is designed with security in mind, incorporating measures to protect user data and interactions.
 
+## 🔗[ View Live Site ](https://pinterest-backend-8yn0.onrender.com/)
+
 ## Features
 
 - **User Registration**: Users can register on the platform.
@@ -43,7 +45,7 @@ This application takes various measures to ensure security, including secure aut
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/pinterest-backend.git
+   git clone https://github.com/namankoolwal/Pinterest-Backend.git
    ```
 
 2. **Navigate to the project directory**:

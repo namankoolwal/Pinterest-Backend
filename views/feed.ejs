@@ -12,7 +12,7 @@
 <% if (posts.length > 0) { %>
   <div class="container mx-auto my-8">
 
-    <h1 class="w-full text-center font-bold text-2xl capitalize"> <%= search || "All Posts" %> </h1>
+    <h1 class="w-full text-center font-bold text-2xl capitalize"> <%= search || "" %> </h1>
   </div>
   <div class="container mx-auto p-8 columns-2 md:columns-3 lg:columns-4 gap-8 space-y-8">
     <% posts.forEach(post => { %>
