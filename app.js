@@ -11,7 +11,6 @@ const rateLimit = require("express-rate-limit");
 const usersRouter = require("./routes/user.routes");
 const postsRouter = require("./routes/posts.routes");
 const boardRouter = require("./routes/board.routes");
-const csrf = require('lusca').csrf;
 require("dotenv").config();
 
 // limit repeated requests to public APIs and/or endpoints 
@@ -36,8 +35,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
   })
 );
-// CSRF middleware - Web application security middleware.
-// app.use(csrf());
+
 // Flash middleware
 app.use(flash());
 
@@ -65,7 +63,6 @@ passport.deserializeUser((id, done) => {
 // ***************************************************************************
 
 // Middleware
-// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
