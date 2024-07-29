@@ -1,3 +1,29 @@
+
+
+
+<footer class='bg-gray-950 text-white flex flex-col md:flex-row justify-between items-center py-6 px-4 md:px-10 gap-6'>
+  <div class='flex flex-col items-center md:items-start gap-2 md:gap-6'>
+    <div class='flex flex-col items-center md:items-start gap-2'>
+      <div id="currentYear" class='text-sm md:text-base'></div>
+      <div class='text-xs md:text-sm text-gray-500'>Made by Naman Khandelwal with ❤</div>
+    </div>
+  </div>
+
+  <div class='flex flex-col items-center gap-3'>
+    <div class='text-sm md:text-base'>Follow me on</div>
+    <div class='flex gap-4 items-center'>
+      <a href="https://github.com/namankoolwal" target='_blank' class='border border-zinc-400 py-2 px-3 rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2'>
+        <i class="ri-github-fill"></i>
+        <span class='hidden md:inline'>GitHub</span>
+      </a>
+      <a href="https://linkedin.com/in/naman-khandelwal-568971189" target='_blank' class='border border-zinc-400 py-2 px-3 rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2'>
+        <i class="ri-linkedin-fill"></i>
+        <span class='hidden md:inline'>LinkedIn</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
 <script>
      function closeAlert() {
           const alert = document.getElementById('success-alert');
@@ -15,7 +41,12 @@
             }, 3000); // 3 seconds
           }
         }
+
+
+  const currentYear = new Date().getFullYear();
+  document.getElementById('currentYear').innerHTML = `Copyright &copy; ${currentYear} Naman Khandelwal | All rights reserved!`
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 </body>
 </html>
