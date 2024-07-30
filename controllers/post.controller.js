@@ -128,7 +128,7 @@ const singlePost = async (req, res) =>{
             return res.status(404).send("Post not found");
         }
         // res.send(post);
-        res.render('singlePost' , {post , nav: user ? true : false});
+        res.render('singlepost' , {post , nav: user ? true : false});
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
