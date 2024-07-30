@@ -71,10 +71,9 @@ const avatarupload = async(req, res)=>{
         return res.status(404).send('User not found');
       }
       
-      const filePath = path.resolve(req.file.path);
       const upload = await User.findByIdAndUpdate(userId,{
         avatar: {
-          data: fs.readFileSync(filePath),
+          url: req.file.path,
           contentType: req.file.mimetype
         }
       } , {new: true});
@@ -82,10 +81,6 @@ const avatarupload = async(req, res)=>{
       if(!upload){
         return res.status(404).send('User not found');
       }
-  
-      fs.unlink(filePath, err => {
-        if (err) console.error(err);
-      });
 
       req.flash('success', 'profile picture updated successfully');
       res.redirect('/profile');

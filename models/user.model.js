@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         }
     ],
     avatar: { 
-        data: Buffer, // Store the binary image data
+        url: String, // Store the binary image data
         contentType: String // Store the content type of the image
      },
     fullname: { type: String  , required: true },

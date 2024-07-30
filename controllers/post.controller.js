@@ -54,7 +54,6 @@ const uploadPost = async (req, res) => {
   }
 
   // console.log(" upload post ",req.body)
-  const filePath = path.resolve(req.file.path);
   try {
     const userId = req.session.passport.user;
     const user = await User.findById(userId);
@@ -65,7 +64,7 @@ const uploadPost = async (req, res) => {
 
     const post = await Post.create({
       img: {
-        data: fs.readFileSync(filePath),
+        url: req.file.path,
         contentType: req.file.mimetype,
       },
       posttext: req.body.posttext,
@@ -84,11 +83,6 @@ if(post){
         boardCreated.posts.push(post._id);
         await boardCreated.save();
     }
-
-
-    fs.unlink(filePath, (err) => {
-      if (err) console.error(err);
-    });
 
     req.flash("success", "Post uploaded successfully");
     res.redirect("/profile");

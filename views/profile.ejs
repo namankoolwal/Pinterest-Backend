@@ -34,8 +34,8 @@
         <i class="text-zinc-300 ri-pencil-fill"></i>
       </span>
       <div class="w-36 h-36 rounded-full border border-zinc-500 overflow-hidden">
-        <% if(!user?.avatar?.data == '' && !user?.avatar?.contentType?.trim() == '' ){ %>
-          <img src="data:<%= user.avatar.contentType %>;base64,<%= user.avatar.data.toString('base64') %>" class="w-full h-full object-cover object-center" alt="Post Image" loading="lazy" />
+        <% if(!user?.avatar?.url == '' && !user?.avatar?.contentType?.trim() == '' ){ %>
+          <img src="<%=user.avatar.url%>" class="w-full h-full object-cover object-center" alt="Post Image" loading="lazy" />
         <%} else{%>
 
           <img src="https://i.pinimg.com/564x/15/03/fc/1503fc4ae8ad7eab7e96b80ca1cfe0df.jpg"
@@ -149,18 +149,18 @@
   <!-- ************************************************************************************************** -->
 
   <% if(user.boards.length <= 0){ %>
-      <h3 class="text-3xl font-bold text-center mt-10">No Posts Yet</h3>
+      <h3 class="text-3xl font-bold text-center mt-10 min-h-screen">No Posts Yet</h3>
   <%}else{%>
 
     
  
-  <div class="card grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-5 md:px-10 mt-10 ">
+  <div class="card min-h-screen grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-5 md:px-10 mt-10 ">
     <% user.boards.forEach(board => { %>
       <a href="/posts/show/<%= board._id  %>">
       <div class="card w-full bg-gray-950 p-3 rounded-lg ">
         <div class="w-full h-32 md:w-full md:h-56 bg-zinc-700 p-1 rounded-lg overflow-hidden mx-auto">
           
-          <img src="data:<%= board?.coverImg?.contentType %>;base64,<%= board?.coverImg?.data.toString('base64') %>" class="h-full w-full object-center object-cover rounded-lg"
+          <img src="<%=board.coverImg.url%>" class="h-full w-full object-center object-cover rounded-lg"
           alt="Post Image" loading="lazy" />
         </div>
           <div class="w-full rounded-lg overflow-hidden mx-auto">

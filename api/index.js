@@ -1,17 +1,17 @@
+require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
-const connectDB = require("./utils/db");
+const connectDB = require("../utils/db");
 const passport = require("passport");
-const User = require("./models/user.model");
+const User = require("../models/user.model");
 const flash = require("connect-flash");
 const rateLimit = require("express-rate-limit");
-const usersRouter = require("./routes/user.routes");
-const postsRouter = require("./routes/posts.routes");
-const boardRouter = require("./routes/board.routes");
-require("dotenv").config();
+const usersRouter = require("../routes/user.routes");
+const postsRouter = require("../routes/posts.routes");
+const boardRouter = require("../routes/board.routes");
 
 // limit repeated requests to public APIs and/or endpoints 
 const limiter = rateLimit({
@@ -22,11 +22,12 @@ const limiter = rateLimit({
 
 const app = express();
 connectDB();
-app.use(limiter);
+// app.use(limiter);
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, '../views')); // Adjust path to views directory
+app.set('view engine', 'ejs');
+
 
 // Express Session
 app.use(
@@ -67,7 +68,7 @@ passport.deserializeUser((id, done) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Routes
 app.use("/", usersRouter);
@@ -95,4 +96,8 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = app;
+// module.exports = app;
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+})

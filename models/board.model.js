@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const BoardSchema = new Schema({
   coverImg: {
-    data: Buffer, // Store the binary image data
+    url: String, // Store the binary image data
     contentType: String // Store the content type of the image
   },
   boardTitle:{

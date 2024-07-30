@@ -4,17 +4,17 @@
 <%- include('./partials/header.ejs') %> 
 
 <% if (length) { %>
-  <div class="container mx-auto my-3 px-10 md:px-0">
-    <span class="font-bold text-lg text-gray-400">Result Found : <%= posts.length %> </span>
+  <div class="container mx-auto my-3 px-10 md:px-0 ">
+    <span class="font-bold text-lg text-gray-400 ">Result Found : <%= posts.length %> </span>
   </div>
 <% } %>
 
 <% if (posts.length > 0) { %>
-  <div class="container mx-auto my-8">
+  <div class="container mx-auto my-10">
 
-    <h1 class="w-full text-center font-bold text-2xl capitalize"> <%= search || "" %> </h1>
+    <h1 class="w-full text-center font-bold text-2xl capitalize underline"> <%= search || "" %> </h1>
   </div>
-  <div class="container mx-auto p-8 columns-2 md:columns-3 lg:columns-4 gap-8 space-y-8">
+  <div class="container min-h-screen mx-auto p-8 columns-2 md:columns-3 lg:columns-4 gap-8 space-y-8" style="min-height: 100vh;">
     <% posts.forEach(post => { %>
       <a href="/posts/post/<%= post._id %>">
         <div class="content-wrapper break-inside-avoid-column mb-5">
@@ -24,7 +24,7 @@
                 <p class="cursor-pointer"><%= post.user.username %></p>
                 <button
                   class="inline-block bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-4 rounded-full save-button"
-                  data-image-url="data:<%= post.img.contentType %>;base64,<%= post.img.data.toString('base64') %>"
+                  data-image-url="<%= post.img.url %>"
                 >
                   Save
                 </button>
@@ -50,7 +50,7 @@
               </div>
             </div>
             <img
-              src="data:<%= post.img.contentType %>;base64,<%= post.img.data.toString('base64') %>"
+              src="<%= post.img.url %>"
               class="w-full h-full object-cover rounded-xl"
               alt="Post Image"
               loading="lazy"

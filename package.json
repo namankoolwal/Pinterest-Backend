@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node api/index.js",
     "build:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
-    "minify:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --minify"
+    "minify:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --minify",
+    "build": "npm run minify:css",
+    "prebuild": "npm run minify:css"
   },
   "dependencies": {
     "connect-flash": "^0.1.1",
@@ -23,7 +25,9 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "multer-storage-cloudinary": "^4.0.0",
+    "cloudinary": "^1.30.0"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.7"

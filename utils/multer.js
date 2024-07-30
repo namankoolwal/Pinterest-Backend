@@ -1,17 +1,18 @@
+const { extname } = require('path');
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
-const path = require('path');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('../config/cloudinary'); // Adjust the path as needed
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, './public/images/uploads')
-    },
-    filename: function(req, file, cb){
-        const uniqueFileName = uuidv4();
-        cb(null, uniqueFileName + path.extname(file.originalname));
-    }
-})
+// Configure Multer to use Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'uploads',
+    format: async (req, file) => extname(file.originalname).substring(1), // Get file extension without the dot
+    public_id: (req, file) => Date.now() + '_' + file.originalname.replace(/\s+/g, '_'), // Unique identifier
+  },
+});
 
-const upload = multer({storage: storage});
+const upload = multer({ storage: storage });
 
 module.exports = upload;

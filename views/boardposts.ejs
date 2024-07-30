@@ -2,7 +2,7 @@
     document.title = "Board Posts Page";
   </script>
   <%- include('./partials/header.ejs') %> 
-  <div class="w-full mx-auto p-6 bg-gray-900 text-gray-200">
+  <div class="w-full min-h-screen mx-auto p-6 bg-gray-900 text-gray-200" style="min-height: 100vh;">
     <div class="mt-8">
       <h2 class="text-3xl font-bold text-center mb-6 capitalize"><%= board.boardTitle %></h2>
       <hr class="border-zinc-700 border">
@@ -51,7 +51,7 @@
               </div>
             </div>
             <img
-              src="data:<%= post.img.contentType %>;base64,<%= post.img.data.toString('base64') %>"
+              src="<%= post.img.url %>"
               class="w-full h-full object-cover rounded-xl"
               alt="Post Image"
               loading="lazy"
