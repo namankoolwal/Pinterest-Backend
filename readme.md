@@ -2,7 +2,7 @@
 
 This project is a backend implementation of a Pinterest-like application. It includes basic functionalities such as user registration, post viewing, board creation, and pin management. The application is designed with security in mind, incorporating measures to protect user data and interactions.
 
-## 🔗[ View Live Site ](https://pinterest-backend-8yn0.onrender.com/)
+## 🔗[ View Live Site ](https://pinterest-backend-nk.vercel.app/)
 
 ## Features
 
@@ -24,6 +24,7 @@ This project is a backend implementation of a Pinterest-like application. It inc
 - **Express-Rate-Limit** for rate limiting
 - **MongoDB** for the database
 - **Mongoose** for MongoDB object modeling
+- **Cloudinary** for storing images on cloud
 
 ## Editor
 
