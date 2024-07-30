@@ -115,7 +115,7 @@ This application takes various measures to ensure security, including secure aut
 
 
 ## License
-  This project is licensed under the MIT [License](./licence). See the LICENSE file for details.
+  This project is licensed under the MIT [License](https://github.com/namankoolwal/Pinterest-Backend/blob/main/LICENSE). See the LICENSE file for details.
 
 ## Feedback
   Feedback is welcomed! Please open an issue if you have any suggestions or find any bugs.
