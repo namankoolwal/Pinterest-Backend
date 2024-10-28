@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node api/index.js",
+    "start": "nodemon api/index.js",
     "build:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
     "minify:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --minify",
     "build": "npm run minify:css",
