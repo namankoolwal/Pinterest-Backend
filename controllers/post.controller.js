@@ -78,7 +78,7 @@ if(post){
 }
     
 
-    const boardCreated = await Board.findOne({ boardTitle: req.body.boardTitle });
+    const boardCreated = await Board.findOne({ boardTitle: { $eq: req.body.boardTitle } });
     if(boardCreated){
         boardCreated.posts.push(post._id);
         await boardCreated.save();
