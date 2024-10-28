@@ -4,6 +4,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
+const lusca = require("lusca");
 const connectDB = require("../utils/db");
 const passport = require("passport");
 const User = require("../models/user.model");
@@ -37,6 +38,9 @@ app.use(
     secret: process.env.SESSION_SECRET,
   })
 );
+
+// CSRF protection middleware
+app.use(lusca.csrf());
 
 // Flash middleware
 app.use(flash());
