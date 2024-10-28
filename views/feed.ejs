@@ -72,17 +72,33 @@
 <%- include('./partials/footer.ejs') %> 
 
 <script>
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.save-button').forEach(button => {
       button.addEventListener('click', event => {
         event.preventDefault(); // Prevent the default behavior
         const imageUrl = button.getAttribute('data-image-url');
-        const link = document.createElement('a');
-        link.href = imageUrl;
-        link.download = 'image.png'; // Set the default download name for the image
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        if (isValidUrl(imageUrl)) {
+          const link = document.createElement('a');
+          link.href = imageUrl;
+          link.download = 'image.png'; // Set the default download name for the image
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } else {
+          console.error('Invalid URL:', imageUrl);
+        }
+          document.body.removeChild(link);
+        } else {
+          console.error('Invalid URL:', imageUrl);
+        }
       });
     });
   });
